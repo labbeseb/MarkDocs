@@ -1,2 +1,2 @@
 # starter
-Base grunt pour les futurs projets
+Base GruntJS pour les futurs projets
