@@ -1,2 +1,2 @@
 # starter
-Base GruntJS pour les futurs projets
+Base GruntJS / ES6-babel / SASS pour les futurs projets
