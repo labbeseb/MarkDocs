@@ -1,0 +1,19 @@
+{
+  "name": "markdocs",
+  "version": "1.0.0",
+  "description": "MD files reader/HTML translator ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webSebLabbe/MarkDocs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/webSebLabbe/MarkDocs/issues"
+  },
+  "homepage": "https://github.com/webSebLabbe/MarkDocs#readme"
+}
