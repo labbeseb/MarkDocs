@@ -1,0 +1,15 @@
+html p,
+body p {
+  color: #333;
+}
+html a,
+body a {
+  color: #0000ff;
+}
+html h1,
+body h1 {
+  margin: 0 auto;
+  font-weight: bold;
+  font-style: italic;
+  text-transform: uppercase;
+}
