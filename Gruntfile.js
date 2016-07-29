@@ -14,7 +14,7 @@ module.exports = function(grunt) {
 					sourcemap: 'none'
 				},
 				files: {
-					'app/styles/sample.css': 'src/sass/sample.sass'
+					'docs/assets/markdocs.css': 'src/scss/markdocs.scss'
 				}
 		    }
 		},
@@ -23,30 +23,44 @@ module.exports = function(grunt) {
 		babel: {
 			options: {
 				sourceMap: false,
-				presets: ['babel-preset-es2015'],
+				presets: ['babel-preset-es2015']
 			},
 			dist: {
 				files: {
-					'app/js/app.js': 'src/scripts/sample.js'
+					'src/scripts/app.dev.js': 'src/scripts/app.js'
 				}
 			}
 		},
-		watch: {
-		  scripts: {
-		    files: ['src/scripts/*.js'],
-		    tasks: ['babel'],
-		    options: {},
-		  },
-		  styles: {
-		    files: ['src/sass/*.sass'],
-		    tasks: ['sass'],
-		    options: {},
-		  }
-		}
+		browserify: {
+            dist: {
+                files: {
+                    'docs/assets/markdocs.js': ['src/scripts/app.dev.js']
+                }
+            }
+		},
+        uglify: {
+		    bim: {
+		        files: {
+		            'docs/assets/markdocs.js': ['docs/assets/markdocs.js']
+                }
+            }
+        },
+        watch: {
+            scripts: {
+                files: ['src/scripts/*.js'],
+                tasks: ['babel', 'browserify', 'uglify:bim'],
+                options: {}
+            },
+            styles: {
+                files: ['src/scss/*.scss'],
+                tasks: ['sass'],
+                options: {}
+            }
+        }
 
 	});
 
 	// Task(s).
 	grunt.registerTask('js', ['watch:scripts']);
 	grunt.registerTask('css', ['watch:styles']);
-}
+};

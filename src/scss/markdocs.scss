@@ -1,0 +1,28 @@
+@import "normalize";
+
+// Couleurs
+$colorFont: #333;
+$colorLight: #dedede;
+
+@mixin info_discrete{
+	margin: 15px auto;
+	font-size: 22px;
+	text-align: center;
+	color: $colorLight;
+}
+
+
+
+// Les basiques
+html,
+body{
+	p{
+		color: $colorFont
+	}
+}
+
+// Les modules
+.err__info{
+	@include info_discrete;
+}
+
