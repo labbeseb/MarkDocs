@@ -1,28 +1,96 @@
 @import "normalize";
 
+
 // Couleurs
 $colorFont: #333;
 $colorLight: #dedede;
 
+// Tailles
+$widthSidebar: 250px;
+
+
+// Les mixins
 @mixin info_discrete{
 	margin: 15px auto;
 	font-size: 22px;
 	text-align: center;
+	text-transform: uppercase;
 	color: $colorLight;
+}
+@mixin clearfix(){
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+		border-collapse: collapse;
+	}
 }
 
 
 
 // Les basiques
 html,
-body{
-	p{
-		color: $colorFont
-	}
+body,
+*{
+	box-sizing: border-box;
+	color: $colorFont;
 }
+
+html,
+body{
+	height: 100%;
+	position: relative;
+}
+
+code{
+
+}
+
+
 
 // Les modules
 .err__info{
 	@include info_discrete;
 }
 
+
+// La grille
+#main-wrapper{
+	min-height: 100%;
+	overflow: auto;
+
+	@include clearfix;
+}
+#markdocs-nav{
+	height: 100%;
+	box-shadow: 0 0 12px #333;
+}
+#markdocs-nav,
+#markdocs-render{
+	padding: 1em;
+}
+#markdocs-render{
+	padding-left: $widthSidebar + 20;
+}
+#markdocs-nav {
+	width: $widthSidebar;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+
+	ul{
+		list-style: none;
+		padding: 0;
+	}
+
+	.title_nav{
+      padding: 0;
+      margin-bottom: 5px;
+
+      @for $i from 1 through 6{
+        &.title_H#{$i}{
+          padding-left: #{$i}0px;
+        }
+      }
+	}
+}

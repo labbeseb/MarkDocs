@@ -408,14 +408,81 @@ textarea {
   /* 2 */
 }
 
-html p,
-body p {
+html,
+body,
+* {
+  box-sizing: border-box;
   color: #333;
+}
+
+html,
+body {
+  height: 100%;
+  position: relative;
 }
 
 .err__info {
   margin: 15px auto;
   font-size: 22px;
   text-align: center;
+  text-transform: uppercase;
   color: #dedede;
+}
+
+#main-wrapper {
+  min-height: 100%;
+  overflow: auto;
+}
+#main-wrapper:after {
+  content: "";
+  display: table;
+  clear: both;
+  border-collapse: collapse;
+}
+
+#markdocs-nav {
+  height: 100%;
+  box-shadow: 0 0 12px #333;
+}
+
+#markdocs-nav,
+#markdocs-render {
+  padding: 1em;
+}
+
+#markdocs-render {
+  padding-left: 270px;
+}
+
+#markdocs-nav {
+  width: 250px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+}
+#markdocs-nav ul {
+  list-style: none;
+  padding: 0;
+}
+#markdocs-nav .title_nav {
+  padding: 0;
+  margin-bottom: 5px;
+}
+#markdocs-nav .title_nav.title_H1 {
+  padding-left: 10px;
+}
+#markdocs-nav .title_nav.title_H2 {
+  padding-left: 20px;
+}
+#markdocs-nav .title_nav.title_H3 {
+  padding-left: 30px;
+}
+#markdocs-nav .title_nav.title_H4 {
+  padding-left: 40px;
+}
+#markdocs-nav .title_nav.title_H5 {
+  padding-left: 50px;
+}
+#markdocs-nav .title_nav.title_H6 {
+  padding-left: 60px;
 }
