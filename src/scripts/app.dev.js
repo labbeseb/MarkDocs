@@ -4,19 +4,18 @@ var _jquery = require("jquery");
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
+var _lodash = require("lodash");
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 var _showdown = require("showdown");
 
 var _showdown2 = _interopRequireDefault(_showdown);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Markdocs = function Markdocs(file) {
-    _classCallCheck(this, Markdocs);
-
-    console.log();
-};
+//TODO : blocker le script si mdFiles pas bon...
+if (typeof mdFiles === 'undefined' && _jquery2.default.isArray(mdFiles)) throw new Error("Il manque la variable mdFiles...");
 
 var ContainerHtml = 'markdocs-render',
     ContainerNav = 'markdocs-nav',
@@ -25,15 +24,35 @@ var ContainerHtml = 'markdocs-render',
     'tables': true
 };
 
+var DocFiles = [];
+
+function rmExtension(file) {
+
+    var arr = file.trim().split('.');
+    arr.pop();
+
+    return arr.join('.');
+}
+
+function toObject(array) {
+
+    for (var i = 0; array.length > i; i++) {
+        DocFiles[i] = {};
+        DocFiles[i].name = rmExtension(array[i]);
+        DocFiles[i].path = array[i];
+    }
+}
+toObject(['hu.md', 'plop.md', 'fkf.md']);
+console.log(DocFiles);
+
 function sendToHtml(txt) {
 
     (0, _jquery2.default)("#" + ContainerHtml).html(txt);
 }
 
-function readMdFile(file, action) {
+function readMdFile(urlFile, action) {
 
-    var reader = new XMLHttpRequest(),
-        urlFile = "" + file;
+    var reader = new XMLHttpRequest();
 
     reader.onload = function () {
         var data = this.responseText;
@@ -80,13 +99,11 @@ function createNav() {
 }
 
 /*===============================
-
+Execution des fonctions
  ================================*/
+
 readMdFile('sample.md', function (data) {
-
-    var mdTxt = parseMdToHtml(data);
-
-    sendToHtml(mdTxt);
+    sendToHtml(parseMdToHtml(data));
 });
 
 setTimeout(function () {

@@ -1,11 +1,11 @@
 import $ from "jquery";
+import _ from "lodash";
 import showdown from "showdown";
 
-class Markdocs{
-    constructor(file){
-        console.log();
-    }
-}
+//TODO : blocker le script si mdFiles pas bon...
+if(typeof mdFiles === 'undefined' && $.isArray(mdFiles))
+    throw new Error (`Il manque la variable mdFiles...`);
+
 
 const   ContainerHtml = ('markdocs-render'),
         ContainerNav = ('markdocs-nav'),
@@ -14,16 +14,38 @@ const   ContainerHtml = ('markdocs-render'),
             'tables': true
         };
 
+let DocFiles = [];
+
+function rmExtension(file){
+
+    let arr = file.trim().split('.');
+    arr.pop();
+
+    return arr.join('.');
+
+}
+
+function toObject(array){
+
+    for(let i=0; array.length > i; i++){
+        DocFiles[i] = {};
+        DocFiles[i].name = rmExtension(array[i]);
+        DocFiles[i].path = array[i];
+    }
+}
+toObject(['hu.md', 'plop.md', 'fkf.md']);
+console.log(DocFiles);
+
+
 function sendToHtml(txt){
 
     $(`#${ContainerHtml}`).html(txt);
 
 }
 
-function readMdFile(file, action){
+function readMdFile(urlFile, action){
 
-    let reader = new XMLHttpRequest(),
-        urlFile = `${file}`;
+    let reader = new XMLHttpRequest();
 
     reader.onload = function(){
         let data = this.responseText;
@@ -57,13 +79,9 @@ function parseMdToHtml(md){
 
 }
 
-
-
 function createNav(){
     let titleList = $('h1, h2, h3, h4, h5, h6'),
         template = `<nav><ul></ul></nav>`;
-
-    console.log('plop');
 
     $(`#${ContainerNav}`).html(template);
 
@@ -76,13 +94,12 @@ function createNav(){
 
 
 /*===============================
-
+Execution des fonctions
  ================================*/
+
+
 readMdFile('sample.md', data => {
-
-    let mdTxt = parseMdToHtml(data);
-
-    sendToHtml(mdTxt);
+    sendToHtml(parseMdToHtml(data));
 });
 
 setTimeout( () => {
