@@ -10,9 +10,20 @@ var _showdown2 = _interopRequireDefault(_showdown);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Markdocs = function Markdocs(file) {
+    _classCallCheck(this, Markdocs);
+
+    console.log();
+};
+
 var ContainerHtml = 'markdocs-render',
     ContainerNav = 'markdocs-nav',
-    Uri = window.location.protocol + '//' + window.location.hostname;
+    Uri = window.location.protocol + '//' + window.location.hostname,
+    ShowdownOptions = {
+    'tables': true
+};
 
 function sendToHtml(txt) {
 
@@ -22,7 +33,7 @@ function sendToHtml(txt) {
 function readMdFile(file, action) {
 
     var reader = new XMLHttpRequest(),
-        urlFile = Uri + "/" + file;
+        urlFile = "" + file;
 
     reader.onload = function () {
         var data = this.responseText;
@@ -47,6 +58,11 @@ function readMdFile(file, action) {
 function parseMdToHtml(md) {
     var converter = new _showdown2.default.Converter();
 
+    // application des options
+    for (var opp in ShowdownOptions) {
+        converter.setOption(opp, ShowdownOptions[opp]);
+    }
+
     return converter.makeHtml(md);
 }
 
@@ -61,14 +77,13 @@ function createNav() {
 
         (0, _jquery2.default)("#" + ContainerNav).find('ul').append("<li><a class=\"" + classTitle + "\" href=\"#" + (0, _jquery2.default)(this).attr('id') + "\">" + (0, _jquery2.default)(this).html() + "</a></li>");
     });
-
-    console.log(titleList);
 }
 
 /*===============================
 
  ================================*/
 readMdFile('sample.md', function (data) {
+
     var mdTxt = parseMdToHtml(data);
 
     sendToHtml(mdTxt);

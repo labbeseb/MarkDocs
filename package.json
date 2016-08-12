@@ -10,8 +10,8 @@
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-uglify": "^2.0.0",
     "grunt-contrib-watch": "^1.0.0",
-    "jquery": "^3.1.0",
     "load-grunt-tasks": "^3.5.0",
+    "jquery": "^3.1.0",
     "showdown": "^1.4.2"
   }
 }

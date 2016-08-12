@@ -421,7 +421,80 @@ body {
   position: relative;
 }
 
-.err__info {
+code {
+  display: inline-block;
+  padding: .5em;
+  border-left: 5px solid #34495e;
+  color: #ecf0f1;
+  background-color: #6d819c;
+}
+
+pre code {
+  display: block;
+  padding-left: 1em;
+}
+pre code:before {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #526379;
+}
+pre code.html {
+  border-left-color: #e67e22;
+}
+pre code.html:before {
+  content: 'html';
+}
+pre code.css {
+  border-left-color: #3498db;
+}
+pre code.css:before {
+  content: 'css';
+}
+pre code.javascript {
+  border-left-color: #f1c40f;
+}
+pre code.javascript:before {
+  content: 'javascript';
+}
+pre code.php {
+  border-left-color: #9b59b6;
+}
+pre code.php:before {
+  content: 'php';
+}
+
+tr:nth-child(odd) {
+  background-color: #f0f0f0;
+}
+
+thead tr {
+  background-color: transparent !important;
+}
+
+ol {
+  list-style: upper-roman;
+}
+ol ol {
+  list-style: decimal;
+}
+ol ol ol {
+  list-style: lower-latin;
+}
+
+blockquote {
+  padding: 5px 5px 5px 10px;
+  border-left: 5px solid #ccc;
+  box-shadow: 2px 2px 5px #ccc;
+}
+blockquote * {
+  font-style: italic;
+  color: #bebebe;
+  text-shadow: 1px 1px #eee;
+}
+
+.info__err {
   margin: 15px auto;
   font-size: 22px;
   text-align: center;
@@ -459,10 +532,21 @@ body {
   position: fixed;
   top: 0;
   bottom: 0;
+  overflow: auto;
+  background-color: #ecf0f1;
 }
 #markdocs-nav ul {
   list-style: none;
   padding: 0;
+}
+#markdocs-nav li {
+  margin-bottom: .5em;
+}
+#markdocs-nav a {
+  text-decoration: none;
+}
+#markdocs-nav a:hover {
+  color: #ccc;
 }
 #markdocs-nav .title_nav {
   padding: 0;

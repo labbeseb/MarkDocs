@@ -1,0 +1,39 @@
+// ================================
+// Les variables ==================
+// ================================
+
+// -*- Couleurs
+$colorFont: #333;
+$colorLight: #dedede;
+
+// -**- Couleurs code
+$colorCodeBg: #6d819c;
+$colorCodeFont: #ecf0f1;
+$colorCodeGeneral: #34495e;
+$colorCodeHtml: #e67e22;
+$colorCodeCss: #3498db;
+$colorCodeJavascript: #f1c40f;
+$colorCodePhp: #9b59b6;
+
+// -*- Tailles
+$widthSidebar: 250px;
+
+
+// ================================
+// Les mixins =====================
+// ================================
+@mixin clearfix(){
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+    border-collapse: collapse;
+  }
+}
+@mixin info_discrete{
+  margin: 15px auto;
+  font-size: 22px;
+  text-align: center;
+  text-transform: uppercase;
+  color: $colorLight;
+}
