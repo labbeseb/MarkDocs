@@ -1,5 +1,7 @@
 module.exports = function(grunt) {
 
+    'use strict';
+
 	// Loader auto...
 	require('load-grunt-tasks')(grunt);
 
@@ -11,13 +13,38 @@ module.exports = function(grunt) {
 		    dist: {
 				options: {
 					style: 'expanded',
-					sourcemap: 'none'
+                    sourcemap: 'auto',
+                    loadPath: 'node_modules/foundation-sites/scss'
 				},
 				files: {
 					'docs/assets/markdocs.css': 'src/scss/markdocs.scss'
 				}
 		    }
 		},
+
+        autoprefixer: {
+            options: {
+                browsers: ['last 2 versions', 'ie 10']
+            },
+            target: {
+                src: 'docs/assets/markdocs.css',
+                dest: 'docs/assets/markdocs.css'
+            }
+        },
+
+        cssmin: {
+            options: {
+                shorthandCompacting: false,
+                roundingPrecision: -1
+            },
+            target: {
+                files: {
+                    'docs/assets/markdocs.min.css': ['docs/assets/markdocs.css']
+                }
+            }
+        },
+
+
 
 		// compilation des scripts
 		babel: {
@@ -41,7 +68,7 @@ module.exports = function(grunt) {
         uglify: {
 		    bim: {
 		        files: {
-		            'docs/assets/markdocs.js': ['docs/assets/markdocs.js']
+		            'docs/assets/markdocs.min.js': ['docs/assets/markdocs.js']
                 }
             }
         },
@@ -53,7 +80,7 @@ module.exports = function(grunt) {
             },
             styles: {
                 files: ['src/scss/*.scss'],
-                tasks: ['sass'],
+                tasks: ['sass', 'autoprefixer', 'cssmin'],
                 options: {}
             }
         }

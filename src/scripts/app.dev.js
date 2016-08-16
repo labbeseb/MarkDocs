@@ -14,8 +14,7 @@ var _showdown2 = _interopRequireDefault(_showdown);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//TODO : blocker le script si mdFiles pas bon...
-if (typeof mdFiles === 'undefined' && _jquery2.default.isArray(mdFiles)) throw new Error("Il manque la variable mdFiles...");
+if (typeof mdFiles === 'undefined' || !_jquery2.default.isArray(mdFiles)) throw new Error("Il manque la variable mdFiles, mdFiles doit être un tableau...");
 
 var ContainerHtml = 'markdocs-render',
     ContainerNav = 'markdocs-nav',
@@ -24,7 +23,7 @@ var ContainerHtml = 'markdocs-render',
     'tables': true
 };
 
-var DocFiles = [];
+var DocFiles = []; // tableau qui des différents fichiers de doc et leurs infos
 
 function rmExtension(file) {
 
@@ -34,7 +33,7 @@ function rmExtension(file) {
     return arr.join('.');
 }
 
-function toObject(array) {
+function convertToObject(array) {
 
     for (var i = 0; array.length > i; i++) {
         DocFiles[i] = {};
@@ -42,8 +41,6 @@ function toObject(array) {
         DocFiles[i].path = array[i];
     }
 }
-toObject(['hu.md', 'plop.md', 'fkf.md']);
-console.log(DocFiles);
 
 function sendToHtml(txt) {
 
@@ -97,15 +94,31 @@ function createNav() {
         (0, _jquery2.default)("#" + ContainerNav).find('ul').append("<li><a class=\"" + classTitle + "\" href=\"#" + (0, _jquery2.default)(this).attr('id') + "\">" + (0, _jquery2.default)(this).html() + "</a></li>");
     });
 }
+function createNavFiles() {
+
+    DocFiles.forEach(function (obj) {
+        console.log(obj);
+
+        for (var i in obj) {
+            console.log(i + " : " + obj[i]);
+        }
+    });
+}
+
+function initPage() {}
 
 /*===============================
-Execution des fonctions
+ === Execution de l'application
  ================================*/
+(function () {
+    readMdFile('sample.md', function (data) {
+        sendToHtml(parseMdToHtml(data));
+    });
 
-readMdFile('sample.md', function (data) {
-    sendToHtml(parseMdToHtml(data));
-});
+    setTimeout(function () {
+        createNav();
+    }, 1500);
 
-setTimeout(function () {
-    createNav();
-}, 1500);
+    convertToObject(['hu.md', 'plop.md', 'fkf.md']);
+    createNavFiles();
+})();

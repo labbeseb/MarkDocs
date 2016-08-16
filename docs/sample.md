@@ -1,4 +1,4 @@
-# Titre 1
+# Markdocs v1.0
 ## Titre 2
 ### Titre 3
 #### Titre 4
@@ -14,11 +14,20 @@ un exemple de texte
 > citation ??
 
 
-Markdown    | Less      | Pretty
+Sass        | Less      | Stylus
 ---         | ---       | ---
-glup        | plop      | gnarf
+glup        | grunt     | webpack
 1           | 2         | 3
 
+ci-dessous une ligne...
+_______________________
+
+encore une...
+*************
+
+...puis une autre
+
+-------
 
 - un exemple de liste classique(1)
 - un exemple de liste classique(2)

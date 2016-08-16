@@ -1,18 +1,29 @@
-@import "normalize";
+@import "foundation";
 @import "config";
 
+
 // Les basiques
-html,
-body,
 *{
   box-sizing: border-box;
-  color: $colorFont;
 }
 
 html,
 body{
+  margin: 0;
   height: 100%;
   position: relative;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  color: $colorFont;
+}
+
+// Include Normalize v3
+@include -zf-normalize;
+
+// Les titres
+@for $i from 1 through 6{
+  h#{$i}{
+    color: $colorTitleFont;
+  }
 }
 
 
@@ -25,7 +36,6 @@ code{
   color: $colorCodeFont;
   background-color: $colorCodeBg;
 }
-
 pre{
   code{
     display: block;
@@ -71,46 +81,30 @@ pre{
   }
 }
 
-// Tableaux
+// Les tableaux
 table{
+  @include table($table-stripe);
 }
-tr{
-
-  &:nth-child(odd){
-    background-color: #f0f0f0;
-  }
-}
-thead{
-  tr{
-    background-color: transparent !important;
-  }
-}
-
 
 // Les listes
 ol{
-  list-style: upper-roman;
-
-  ol{
-    list-style: decimal;
-
-    ol{
-      list-style: lower-latin;
-    }
-  }
+  list-style: decimal;
 }
 
 // Divers
 blockquote{
   padding: 5px 5px 5px 10px;
-  border-left: 5px solid #ccc;
-  box-shadow: 2px 2px 5px #ccc;
+  border-left: $blockquote-border;
 
   *{
     font-style: italic;
     color: #9e9e9e;
-    text-shadow: 1px 1px #eee;
   }
+}
+hr{
+  margin: $hr-margin;
+  border-top: 1px solid #cdcdcd;
+  ;
 }
 
 
@@ -121,7 +115,7 @@ blockquote{
 }
 
 
-// La grille
+// Le rendu...
 #main-wrapper{
   min-height: 100%;
   overflow: auto;
@@ -130,14 +124,13 @@ blockquote{
 }
 #markdocs-nav{
   height: 100%;
+  padding: 1em;
   box-shadow: 0 0 12px #333;
 }
-#markdocs-nav,
 #markdocs-render{
-  padding: 1em;
-}
-#markdocs-render{
-  padding-left: $widthSidebar + 20;
+  padding: 1em 30px 2em $widthSidebar + 30;
+
+
 }
 #markdocs-nav {
   width: $widthSidebar;
@@ -145,7 +138,8 @@ blockquote{
   top: 0;
   bottom: 0;
   overflow: auto;
-  background-color: #ecf0f1;
+  color: $colorNavFont;
+  background-color: $colorNavBg;
 
   ul{
     list-style: none;
@@ -158,6 +152,7 @@ blockquote{
 
   a{
     text-decoration: none;
+    color: inherit;
     
     &:hover{
       color: #ccc;
@@ -165,13 +160,28 @@ blockquote{
   }
 
   .title_nav{
+    display: inline-block;
     padding: 0;
     margin-bottom: 5px;
 
-    @for $i from 1 through 6{
+    @for $i from 3 through 6{
       &.title_H#{$i}{
-        padding-left: #{$i}0px;
+        padding-left: #{$i*5}px;
       }
     }
+  }
+  .title_H1{
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: underline;
+  }
+  .title_H2{
+    margin-top: .5em;
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
   }
 }

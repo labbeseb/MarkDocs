@@ -1,10 +1,14 @@
 // ================================
-// Les variables ==================
+// == Les variables ===============
 // ================================
 
 // -*- Couleurs
-$colorFont: #333;
+$colorFont: #333333;
 $colorLight: #dedede;
+$colorTitleFont: #2c3e50;
+
+$colorNavBg: #1abc9c;
+$colorNavFont: #ecf0f1;
 
 // -**- Couleurs code
 $colorCodeBg: #6d819c;
@@ -20,16 +24,8 @@ $widthSidebar: 250px;
 
 
 // ================================
-// Les mixins =====================
+// == Les mixins ==================
 // ================================
-@mixin clearfix(){
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-    border-collapse: collapse;
-  }
-}
 @mixin info_discrete{
   margin: 15px auto;
   font-size: 22px;
