@@ -1,13 +1,23 @@
 import $ from "jquery";
-import _ from "lodash";
 import showdown from "showdown";
+
+//TODO : modifier en objet parametrable dans le front
+//TODO : définir style navigation files avec séparateur de la nav principale
+//TODO : faire la doc de markdocs.........
+//TODO : (moins important) - loader au chergement des fichiers de doc
 
 if( typeof mdFiles === 'undefined' || !$.isArray(mdFiles) )
     throw new Error(`Il manque la variable mdFiles, mdFiles doit être un tableau...`);
 
 
-const   ContainerHtml = ('markdocs-render'),
-        ContainerNav = ('markdocs-nav'),
+const   MdFiles = mdFiles,
+        GenericNames = {
+            docBody: 'markdocs-render',
+            docNav: 'markdocs-nav',
+            filesNav: 'markdocs-nav-files',
+            loadRender: 'markdocs-renderLoad',
+            data_btnFilesNav: 'file-name'
+        },
         Uri = window.location.protocol + '//' + window.location.hostname,
         ShowdownOptions = {
             'tables': true
@@ -35,7 +45,7 @@ function convertToObject(array){
 
 function sendToHtml(txt){
 
-    $(`#${ContainerHtml}`).html(txt);
+    $(`#${GenericNames.docBody}`).html(`<div id="${GenericNames.loadRender}">${txt}</div>`);
 
 }
 
@@ -75,32 +85,46 @@ function parseMdToHtml(md){
 
 }
 
-function createNav(){
+function createNavFiles(){
+    // création du container
+    $(`#${GenericNames.docNav}`).append(`<nav><ul id="${GenericNames.filesNav}"></ul></nav>`);
+
+    // parcourt du tableau de fichiers
+    DocFiles.forEach(function(obj){
+        $(`#${GenericNames.filesNav}`)
+            .append(
+                `<li>
+                    <button data-${GenericNames.data_btnFilesNav}="${obj['path']}">${obj['name']}</button>
+                </li>`);
+    });
+
+}
+function createNavPage(){
     let titleList = $('h1, h2, h3, h4, h5, h6'),
         template = `<nav><ul></ul></nav>`;
 
-    $(`#${ContainerNav}`).html(template);
+    $(`#${GenericNames.docNav}`).html(template);
 
     titleList.each( function(){
         let classTitle = `title_nav title_${ $(this).get(0).tagName }`;
 
-        $(`#${ContainerNav}`).find('ul').append(`<li><a class="${classTitle}" href="#${ $(this).attr('id') }">${ $(this).html() }</a></li>`)
+        $(`#${GenericNames.docNav}`).find('ul').append(`<li><a class="${classTitle}" href="#${ $(this).attr('id') }">${ $(this).html() }</a></li>`)
     });
 }
-function createNavFiles(){
 
-    DocFiles.forEach(function(obj){
-        console.log(obj);
-
-        for(var i in obj){
-            console.log(`${i} : ${obj[i]}`);
-        }
+function initPage(filePage){
+    readMdFile(filePage, data => {
+        sendToHtml(parseMdToHtml(data));
     });
 
-}
+    $(`#${GenericNames.loadRender}`).ready( () =>{
+        setTimeout( () => {
+            createNavPage();
 
-function initPage(){
-
+            convertToObject(MdFiles);
+            createNavFiles();
+        }, 100);
+    });
 }
 
 
@@ -108,14 +132,11 @@ function initPage(){
  === Execution de l'application
  ================================*/
 (function(){
-    readMdFile('sample.md', data => {
-        sendToHtml(parseMdToHtml(data));
+
+    initPage(MdFiles[0]);
+
+    $('body').on('click', 'button', function(){
+        initPage( $(this).data(GenericNames.data_btnFilesNav) );
     });
 
-    setTimeout( () => {
-        createNav();
-    }, 1500);
-
-    convertToObject(['hu.md', 'plop.md', 'fkf.md']);
-    createNavFiles();
 })();

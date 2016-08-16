@@ -4,20 +4,27 @@ var _jquery = require("jquery");
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _lodash = require("lodash");
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
 var _showdown = require("showdown");
 
 var _showdown2 = _interopRequireDefault(_showdown);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//TODO : modifier en objet parametrable dans le front
+//TODO : définir style navigation files avec séparateur de la nav principale
+//TODO : faire la doc de markdocs.........
+//TODO : (moins important) - loader au chergement des fichiers de doc
+
 if (typeof mdFiles === 'undefined' || !_jquery2.default.isArray(mdFiles)) throw new Error("Il manque la variable mdFiles, mdFiles doit être un tableau...");
 
-var ContainerHtml = 'markdocs-render',
-    ContainerNav = 'markdocs-nav',
+var MdFiles = mdFiles,
+    GenericNames = {
+    docBody: 'markdocs-render',
+    docNav: 'markdocs-nav',
+    filesNav: 'markdocs-nav-files',
+    loadRender: 'markdocs-renderLoad',
+    data_btnFilesNav: 'file-name'
+},
     Uri = window.location.protocol + '//' + window.location.hostname,
     ShowdownOptions = {
     'tables': true
@@ -44,7 +51,7 @@ function convertToObject(array) {
 
 function sendToHtml(txt) {
 
-    (0, _jquery2.default)("#" + ContainerHtml).html(txt);
+    (0, _jquery2.default)("#" + GenericNames.docBody).html("<div id=\"" + GenericNames.loadRender + "\">" + txt + "</div>");
 }
 
 function readMdFile(urlFile, action) {
@@ -82,43 +89,51 @@ function parseMdToHtml(md) {
     return converter.makeHtml(md);
 }
 
-function createNav() {
+function createNavFiles() {
+    // création du container
+    (0, _jquery2.default)("#" + GenericNames.docNav).append("<nav><ul id=\"" + GenericNames.filesNav + "\"></ul></nav>");
+
+    // parcourt du tableau de fichiers
+    DocFiles.forEach(function (obj) {
+        (0, _jquery2.default)("#" + GenericNames.filesNav).append("<li>\n                    <button data-" + GenericNames.data_btnFilesNav + "=\"" + obj['path'] + "\">" + obj['name'] + "</button>\n                </li>");
+    });
+}
+function createNavPage() {
     var titleList = (0, _jquery2.default)('h1, h2, h3, h4, h5, h6'),
         template = "<nav><ul></ul></nav>";
 
-    (0, _jquery2.default)("#" + ContainerNav).html(template);
+    (0, _jquery2.default)("#" + GenericNames.docNav).html(template);
 
     titleList.each(function () {
         var classTitle = "title_nav title_" + (0, _jquery2.default)(this).get(0).tagName;
 
-        (0, _jquery2.default)("#" + ContainerNav).find('ul').append("<li><a class=\"" + classTitle + "\" href=\"#" + (0, _jquery2.default)(this).attr('id') + "\">" + (0, _jquery2.default)(this).html() + "</a></li>");
-    });
-}
-function createNavFiles() {
-
-    DocFiles.forEach(function (obj) {
-        console.log(obj);
-
-        for (var i in obj) {
-            console.log(i + " : " + obj[i]);
-        }
+        (0, _jquery2.default)("#" + GenericNames.docNav).find('ul').append("<li><a class=\"" + classTitle + "\" href=\"#" + (0, _jquery2.default)(this).attr('id') + "\">" + (0, _jquery2.default)(this).html() + "</a></li>");
     });
 }
 
-function initPage() {}
+function initPage(filePage) {
+    readMdFile(filePage, function (data) {
+        sendToHtml(parseMdToHtml(data));
+    });
+
+    (0, _jquery2.default)("#" + GenericNames.loadRender).ready(function () {
+        setTimeout(function () {
+            createNavPage();
+
+            convertToObject(MdFiles);
+            createNavFiles();
+        }, 100);
+    });
+}
 
 /*===============================
  === Execution de l'application
  ================================*/
 (function () {
-    readMdFile('sample.md', function (data) {
-        sendToHtml(parseMdToHtml(data));
+
+    initPage(MdFiles[0]);
+
+    (0, _jquery2.default)('body').on('click', 'button', function () {
+        initPage((0, _jquery2.default)(this).data(GenericNames.data_btnFilesNav));
     });
-
-    setTimeout(function () {
-        createNav();
-    }, 1500);
-
-    convertToObject(['hu.md', 'plop.md', 'fkf.md']);
-    createNavFiles();
 })();
