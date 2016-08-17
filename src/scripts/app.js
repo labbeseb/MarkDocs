@@ -1,10 +1,21 @@
-import $ from "jquery";
-import showdown from "showdown";
-
-//TODO : modifier en objet parametrable dans le front
+//TODO : modifier en library
 //TODO : définir style navigation files avec séparateur de la nav principale
 //TODO : faire la doc de markdocs.........
+//TODO : page d'erreur si .md pas trouvé
 //TODO : (moins important) - loader au chargement des fichiers de doc
+
+
+
+class Markdocs {
+
+    constructor(options){
+        this.options = options;
+        console.log(options);
+    }
+}
+
+
+
 
 if( typeof mdFiles === 'undefined' || !$.isArray(mdFiles) )
     throw new Error(`Il manque la variable mdFiles, mdFiles doit être un tableau...`);
@@ -30,8 +41,10 @@ function rmExtension(file){
     let arr = file.trim().split('.');
     arr.pop();
 
-    return arr.join('.');
+    let stringPath = arr.join('.'),
+        resultNameArr = stringPath.split('/');
 
+    return resultNameArr.pop();
 }
 
 function convertToObject(array){

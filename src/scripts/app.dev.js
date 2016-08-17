@@ -1,21 +1,22 @@
-"use strict";
+'use strict';
 
-var _jquery = require("jquery");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _showdown = require("showdown");
-
-var _showdown2 = _interopRequireDefault(_showdown);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//TODO : modifier en objet parametrable dans le front
+//TODO : modifier en library
 //TODO : définir style navigation files avec séparateur de la nav principale
 //TODO : faire la doc de markdocs.........
+//TODO : page d'erreur si .md pas trouvé
 //TODO : (moins important) - loader au chargement des fichiers de doc
 
-if (typeof mdFiles === 'undefined' || !_jquery2.default.isArray(mdFiles)) throw new Error("Il manque la variable mdFiles, mdFiles doit être un tableau...");
+
+var Markdocs = function Markdocs(options) {
+    _classCallCheck(this, Markdocs);
+
+    this.options = options;
+    console.log(options);
+};
+
+if (typeof mdFiles === 'undefined' || !$.isArray(mdFiles)) throw new Error('Il manque la variable mdFiles, mdFiles doit être un tableau...');
 
 var MdFiles = mdFiles,
     GenericNames = {
@@ -37,7 +38,10 @@ function rmExtension(file) {
     var arr = file.trim().split('.');
     arr.pop();
 
-    return arr.join('.');
+    var stringPath = arr.join('.'),
+        resultNameArr = stringPath.split('/');
+
+    return resultNameArr.pop();
 }
 
 function convertToObject(array) {
@@ -51,7 +55,7 @@ function convertToObject(array) {
 
 function sendToHtml(txt) {
 
-    (0, _jquery2.default)("#" + GenericNames.docBody).html("<div id=\"" + GenericNames.loadRender + "\">" + txt + "</div>");
+    $('#' + GenericNames.docBody).html('<div id="' + GenericNames.loadRender + '">' + txt + '</div>');
 }
 
 function readMdFile(urlFile, action) {
@@ -79,7 +83,7 @@ function readMdFile(urlFile, action) {
 }
 
 function parseMdToHtml(md) {
-    var converter = new _showdown2.default.Converter();
+    var converter = new showdown.Converter();
 
     // application des options
     for (var opp in ShowdownOptions) {
@@ -91,24 +95,24 @@ function parseMdToHtml(md) {
 
 function createNavFiles() {
     // création du container
-    var template = "<hr><div id=\"" + GenericNames.filesNav + "\"><p>Catégories disponibles&nbsp;:</p></div>";
-    (0, _jquery2.default)("#" + GenericNames.docNav).append(template);
+    var template = '<hr><div id="' + GenericNames.filesNav + '"><p>Catégories disponibles&nbsp;:</p></div>';
+    $('#' + GenericNames.docNav).append(template);
 
     // parcourt du tableau de fichiers
     DocFiles.forEach(function (obj) {
-        (0, _jquery2.default)("#" + GenericNames.filesNav).append("<span>\n                    <button data-" + GenericNames.data_btnFilesNav + "=\"" + obj['path'] + "\" class=\"btn__navfiles\">" + obj['name'] + "</button>\n                </span>");
+        $('#' + GenericNames.filesNav).append('<span>\n                    <button data-' + GenericNames.data_btnFilesNav + '="' + obj['path'] + '" class="btn__navfiles">' + obj['name'] + '</button>\n                </span>');
     });
 }
 function createNavPage() {
-    var titleList = (0, _jquery2.default)('h1, h2, h3, h4, h5, h6'),
-        template = "<nav><ul></ul></nav>";
+    var titleList = $('h1, h2, h3, h4, h5, h6'),
+        template = '<nav><ul></ul></nav>';
 
-    (0, _jquery2.default)("#" + GenericNames.docNav).html(template);
+    $('#' + GenericNames.docNav).html(template);
 
     titleList.each(function () {
-        var classTitle = "title_nav title_" + (0, _jquery2.default)(this).get(0).tagName;
+        var classTitle = 'title_nav title_' + $(this).get(0).tagName;
 
-        (0, _jquery2.default)("#" + GenericNames.docNav).find('ul').append("<li><a class=\"" + classTitle + "\" href=\"#" + (0, _jquery2.default)(this).attr('id') + "\">" + (0, _jquery2.default)(this).html() + "</a></li>");
+        $('#' + GenericNames.docNav).find('ul').append('<li><a class="' + classTitle + '" href="#' + $(this).attr('id') + '">' + $(this).html() + '</a></li>');
     });
 }
 
@@ -117,7 +121,7 @@ function initPage(filePage) {
         sendToHtml(parseMdToHtml(data));
     });
 
-    (0, _jquery2.default)("#" + GenericNames.loadRender).ready(function () {
+    $('#' + GenericNames.loadRender).ready(function () {
         setTimeout(function () {
             createNavPage();
 
@@ -137,7 +141,7 @@ function initPage(filePage) {
 
     initPage(MdFiles[0]);
 
-    (0, _jquery2.default)('body').on('click', 'button', function () {
-        initPage((0, _jquery2.default)(this).data(GenericNames.data_btnFilesNav));
+    $('body').on('click', 'button', function () {
+        initPage($(this).data(GenericNames.data_btnFilesNav));
     });
 })();

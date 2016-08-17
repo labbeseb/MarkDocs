@@ -58,13 +58,19 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		browserify: {
+        concat: {
+            options: {
+                separator: ';',
+            },
             dist: {
-                files: {
-                    'docs/assets/markdocs.js': ['src/scripts/app.dev.js']
-                }
+                src: [
+                    'node_modules/jquery/dist/jquery.js',
+                    'node_modules/showdown/dist/showdown.js',
+                    'src/scripts/app.dev.js'
+                ],
+                dest: 'docs/assets/markdocs.js'
             }
-		},
+        },
         uglify: {
 		    bim: {
 		        files: {
@@ -72,10 +78,14 @@ module.exports = function(grunt) {
                 }
             }
         },
+
+
+
+
         watch: {
             scripts: {
                 files: ['src/scripts/*.js'],
-                tasks: ['babel', 'browserify', 'uglify:bim'],
+                tasks: ['babel', 'concat:dist', 'uglify:bim'],
                 options: {}
             },
             styles: {

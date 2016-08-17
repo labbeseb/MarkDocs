@@ -17,8 +17,16 @@
 </div>
 
 <script>
-    var mdFiles = ['sample.md','plop.md'];
+    var mdFiles = ['md/doc_markdocs.v1.md', 'md/sample.md'];
 </script>
-<script src="assets/markdocs.min.js"></script>
+<script src=""></script>
+<script src="assets/markdocs.js"></script>
+
+<script>
+    var opt = {
+            mdFiles: ['md/doc_markdocs.v1.md', 'md/sample.md']
+        },
+        p = new Markdocs(opt);
+</script>
 </body>
 </html>
