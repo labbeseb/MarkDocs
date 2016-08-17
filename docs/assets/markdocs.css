@@ -529,16 +529,21 @@ ol {
 
 blockquote {
   padding: 5px 5px 5px 10px;
-  border-left: 1px solid #cacaca;
+  border-left: 1px solid #dedede;
+  box-shadow: -1px 0 0 0 #b8b8b8;
 }
 blockquote * {
   font-style: italic;
-  color: #9e9e9e;
+  color: #b8b8b8;
 }
 
 hr {
   margin: 1.25rem auto;
   border-top: 1px solid #cdcdcd;
+}
+#markdocs-nav hr {
+  border-top-color: #148f77;
+  border-bottom-color: #28e1bd;
 }
 
 .info__err {
@@ -546,6 +551,17 @@ hr {
   font-size: 22px;
   text-align: center;
   text-transform: uppercase;
+  color: #dedede;
+}
+
+.btn__navfiles {
+  display: inline-block;
+  border: none;
+  background-color: #d35400;
+  color: #dedede;
+}
+.btn__navfiles:hover, .btn__navfiles:focus {
+  background-color: #ff883a;
   color: #dedede;
 }
 

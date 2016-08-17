@@ -12631,7 +12631,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //TODO : modifier en objet parametrable dans le front
 //TODO : définir style navigation files avec séparateur de la nav principale
 //TODO : faire la doc de markdocs.........
-//TODO : (moins important) - loader au chergement des fichiers de doc
+//TODO : (moins important) - loader au chargement des fichiers de doc
 
 if (typeof mdFiles === 'undefined' || !_jquery2.default.isArray(mdFiles)) throw new Error("Il manque la variable mdFiles, mdFiles doit être un tableau...");
 
@@ -12709,11 +12709,12 @@ function parseMdToHtml(md) {
 
 function createNavFiles() {
     // création du container
-    (0, _jquery2.default)("#" + GenericNames.docNav).append("<nav><ul id=\"" + GenericNames.filesNav + "\"></ul></nav>");
+    var template = "<hr><div id=\"" + GenericNames.filesNav + "\"><p>Catégories disponibles&nbsp;:</p></div>";
+    (0, _jquery2.default)("#" + GenericNames.docNav).append(template);
 
     // parcourt du tableau de fichiers
     DocFiles.forEach(function (obj) {
-        (0, _jquery2.default)("#" + GenericNames.filesNav).append("<li>\n                    <button data-" + GenericNames.data_btnFilesNav + "=\"" + obj['path'] + "\">" + obj['name'] + "</button>\n                </li>");
+        (0, _jquery2.default)("#" + GenericNames.filesNav).append("<span>\n                    <button data-" + GenericNames.data_btnFilesNav + "=\"" + obj['path'] + "\" class=\"btn__navfiles\">" + obj['name'] + "</button>\n                </span>");
     });
 }
 function createNavPage() {
@@ -12739,7 +12740,10 @@ function initPage(filePage) {
             createNavPage();
 
             convertToObject(MdFiles);
-            createNavFiles();
+
+            if (MdFiles.length > 1) {
+                createNavFiles();
+            }
         }, 100);
     });
 }

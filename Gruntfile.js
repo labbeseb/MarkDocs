@@ -13,7 +13,7 @@ module.exports = function(grunt) {
 		    dist: {
 				options: {
 					style: 'expanded',
-                    sourcemap: 'auto',
+                    sourcemap: 'inline',
                     loadPath: 'node_modules/foundation-sites/scss'
 				},
 				files: {
