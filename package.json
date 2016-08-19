@@ -1,6 +1,6 @@
 {
-  "name": "Markdocs",
-  "version": "1.0.0",
+  "name": "markdocs",
+  "version": "1.0.2",
   "description": "MD files reader, convert to HTML & and build documentation pages",
   "author": "seblabbe <labbe.seb@gmail.com> (https://github.com/webSebLabbe)",
   "devDependencies": {
