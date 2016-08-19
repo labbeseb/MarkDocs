@@ -15,6 +15,7 @@ const Defaults = {
     genericNames: {
         container_docBody: 'markdocs-render',
         container_docNav: 'markdocs-nav',
+        container_navGenerated: 'markdocs-nav-generated',
         container_filesNav: 'markdocs-nav-files',
         container_loadRender: 'markdocs-renderLoad',
         data_btnFilesNav: 'file-name'
@@ -30,6 +31,7 @@ class Markdocs {
         // =*= Propriétés
         th._settings = Markdocs._mergeOptions(options);
         th._docFiles = [];
+        th._timerLoadNav = 100;
 
         // =*= Vérifications
         if( typeof th._settings.mdFiles === 'undefined' || !$.isArray(th._settings.mdFiles) )
@@ -40,6 +42,9 @@ class Markdocs {
 
         // =*= Events
         $('body').on('click', 'button', function(){
+            $(`#${th._settings.genericNames.container_docNav}`);
+                // .find(`#${th._settings.genericNames.container_navGenerated}`).fadeOut(th._timerLoadNav);
+
             th._loadPage(th._settings.mdFiles, $(this).data(th._settings.genericNames.data_btnFilesNav));
         });
     }
@@ -79,9 +84,8 @@ class Markdocs {
         });
 
         // -**- attend la fin du chargement du contenu pour générer la navigation...
-        $(`#${this._settings.genericNames.loadRender}`).ready( () => {
+        $(`#${this._settings.genericNames.container_loadRender}`).ready( () => {
             setTimeout( () => {
-                // -***-
                 this._createNavPage();
 
                 Markdocs._convertToObject(arrayFiles, this._docFiles);
@@ -89,7 +93,7 @@ class Markdocs {
                 if(arrayFiles.length > 1) {
                     this._createNavFiles();
                 }
-            }, 500);
+            }, this._timerLoadNav);
         });
     }
 
@@ -131,9 +135,11 @@ class Markdocs {
         const th = this;
 
         let titleList = $('h1, h2, h3, h4, h5, h6'),
-            template = `<nav><ul></ul></nav>`;
+            template = `<nav id="${th._settings.genericNames.container_navGenerated}"><ul></ul></nav>`;
 
-        $(`#${th._settings.genericNames.container_docNav}`).html(template);
+        $(`#${th._settings.genericNames.container_docNav}`)
+            .html(template);
+            // .find(`#${th._settings.genericNames.container_navGenerated}`).fadeIn('fast');
 
         titleList.each( function(){
             let classTitle = `title_nav title_${ $(this).get(0).tagName }`;

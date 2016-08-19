@@ -12634,6 +12634,7 @@ var Defaults = {
     genericNames: {
         container_docBody: 'markdocs-render',
         container_docNav: 'markdocs-nav',
+        container_navGenerated: 'markdocs-nav-generated',
         container_filesNav: 'markdocs-nav-files',
         container_loadRender: 'markdocs-renderLoad',
         data_btnFilesNav: 'file-name'
@@ -12649,6 +12650,7 @@ var Markdocs = function () {
         // =*= Propriétés
         th._settings = Markdocs._mergeOptions(options);
         th._docFiles = [];
+        th._timerLoadNav = 100;
 
         // =*= Vérifications
         if (typeof th._settings.mdFiles === 'undefined' || !$.isArray(th._settings.mdFiles)) throw new Error('Il manque l\'index mdFiles, mdFiles doit être un tableau...');
@@ -12658,6 +12660,9 @@ var Markdocs = function () {
 
         // =*= Events
         $('body').on('click', 'button', function () {
+            $('#' + th._settings.genericNames.container_docNav);
+            // .find(`#${th._settings.genericNames.container_navGenerated}`).fadeOut(th._timerLoadNav);
+
             th._loadPage(th._settings.mdFiles, $(this).data(th._settings.genericNames.data_btnFilesNav));
         });
     }
@@ -12702,9 +12707,8 @@ var Markdocs = function () {
             });
 
             // -**- attend la fin du chargement du contenu pour générer la navigation...
-            $('#' + this._settings.genericNames.loadRender).ready(function () {
+            $('#' + this._settings.genericNames.container_loadRender).ready(function () {
                 setTimeout(function () {
-                    // -***-
                     _this._createNavPage();
 
                     Markdocs._convertToObject(arrayFiles, _this._docFiles);
@@ -12712,7 +12716,7 @@ var Markdocs = function () {
                     if (arrayFiles.length > 1) {
                         _this._createNavFiles();
                     }
-                }, 500);
+                }, _this._timerLoadNav);
             });
         }
     }, {
@@ -12753,9 +12757,10 @@ var Markdocs = function () {
             var th = this;
 
             var titleList = $('h1, h2, h3, h4, h5, h6'),
-                template = '<nav><ul></ul></nav>';
+                template = '<nav id="' + th._settings.genericNames.container_navGenerated + '"><ul></ul></nav>';
 
             $('#' + th._settings.genericNames.container_docNav).html(template);
+            // .find(`#${th._settings.genericNames.container_navGenerated}`).fadeIn('fast');
 
             titleList.each(function () {
                 var classTitle = 'title_nav title_' + $(this).get(0).tagName;
