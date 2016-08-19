@@ -99,7 +99,7 @@ var Markdocs = function () {
                     if (arrayFiles.length > 1) {
                         _this._createNavFiles();
                     }
-                }, 100);
+                }, 500);
             });
         }
     }, {
