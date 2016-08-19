@@ -1,5 +1,5 @@
 {
-  "name": "markdocs",
+  "name": "markdocs-js",
   "description": "MD files reader, convert to HTML & and build documentation pages",
   "main": "",
   "authors": [
