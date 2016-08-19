@@ -1,34 +1,42 @@
-# Divers exemples des possibilités...
+# Divers exemples...
 ## Titre 2
 ### Titre 3
 #### Titre 4
 ##### Titre 5
 ###### Titre 6
 
-## Autre titre 2
-### Autre titre 3
-un exemple de texte
-
-## Plop
-
-> citation ??
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aut blanditiis distinctio eligendi et eveniet impedit laboriosam modi molestias nostrum perferendis, provident quidem quo, repudiandae similique! Excepturi itaque maiores nihil.
 
 
+
+Features
+-------------
+
+
+
+### Blockquote
+> citation !!
+
+### Table
 Sass        | Less      | Stylus
 ---         | ---       | ---
 glup        | grunt     | webpack
 1           | 2         | 3
 
-ci-dessous une ligne...
+
+
+### Séparations
 _______________________
 
-encore une...
+
 *************
 
-...puis une autre
 
 -------
 
+
+
+### Listes
 - un exemple de liste classique(1)
 - un exemple de liste classique(2)
 
@@ -40,9 +48,15 @@ encore une...
         1. paf
 4. And another item.
 
+
+
+### Typo helpers
 Paragraphe avec du **gras**, de *l'italique*, [un lien](#acces-au-lien),
 [un lien avec title](#acces-au-lien "Il a bien un title !").
 
+
+
+### Code beautify
 
 ```
 exemple code
