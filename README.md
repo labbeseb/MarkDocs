@@ -11,4 +11,4 @@ ou...
     bower install markdocs-js
 
 ---
-[Demo et suite ici...](http://webseblabbe.github.io/MarkDocs/)
+[Demo et suite ici...](http://webseblabbe.github.io/MarkDocs/docs/)
