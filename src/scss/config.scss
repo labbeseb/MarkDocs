@@ -1,0 +1,36 @@
+// ================================
+// == Les variables ===============
+// ================================
+
+// -*- Couleurs
+$colorFont: #333333;
+$colorLight: #dedede;
+$colorTitleFont: #2c3e50;
+
+$colorNavBg: #6bb1a3;
+$colorNavFont: #ecf0f1;
+
+// -**- Couleurs code
+$colorCodeBg: #6d819c;
+$colorCodeFont: #ecf0f1;
+$colorCodeGeneral: #34495e;
+$colorCodeHtml: #e67e22;
+$colorCodeCss: #3498db;
+$colorCodeJavascript: #f1c40f;
+$colorCodePhp: #9b59b6;
+$colorBtn: #5a5a5a;
+
+// -*- Tailles
+$widthSidebar: 250px;
+
+
+// ================================
+// == Les mixins ==================
+// ================================
+@mixin info_discrete{
+  margin: 15px auto;
+  font-size: 22px;
+  text-align: center;
+  text-transform: uppercase;
+  color: $colorLight;
+}

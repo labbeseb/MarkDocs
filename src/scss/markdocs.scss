@@ -1,0 +1,203 @@
+@import "foundation";
+@import "config";
+
+
+// Les basiques
+*{
+  box-sizing: border-box;
+}
+
+html,
+body{
+  margin: 0;
+  height: 100%;
+  position: relative;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  color: $colorFont;
+}
+
+// Include Normalize v3
+@include -zf-normalize;
+
+// Les titres
+@for $i from 1 through 6{
+  h#{$i}{
+    color: $colorTitleFont;
+  }
+}
+
+
+// Code blocks style
+code{
+
+  display: inline-block;
+  padding: .5em;
+  border-left: 5px solid $colorCodeGeneral;
+  color: $colorCodeFont;
+  background-color: $colorCodeBg;
+}
+pre{
+  code{
+    display: block;
+    padding-left: 1em;
+
+    &:before{
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: darken( $colorCodeBg, 12% );
+    }
+
+    &.html{
+      border-left-color: $colorCodeHtml;
+
+      &:before{
+        content: 'html';
+      }
+    }
+    &.css{
+      border-left-color: $colorCodeCss;
+
+      &:before{
+        content: 'css';
+      }
+    }
+    &.javascript{
+      border-left-color: $colorCodeJavascript;
+
+      &:before{
+        content: 'javascript';
+      }
+    }
+    &.php{
+      border-left-color: $colorCodePhp;
+
+      &:before{
+        content: 'php';
+      }
+    }
+
+  }
+}
+
+// Les tableaux
+table{
+  @include table($table-stripe);
+}
+
+// Les listes
+ol{
+  list-style: decimal;
+}
+
+// Divers
+blockquote{
+  padding: 5px 5px 5px 10px;
+  border-left: 1px solid $colorLight;
+  box-shadow: -1px 0 0 0 darken($colorLight, 15%);
+
+  *{
+    font-style: italic;
+    color: darken($colorLight, 15%);
+  }
+}
+hr{
+  margin: $hr-margin;
+  border-top: 1px solid #cdcdcd;
+
+  #markdocs-nav & {
+    border-top-color: darken($colorNavBg, 10%);
+    border-bottom-color: lighten($colorNavBg, 10%);
+  }
+}
+
+
+// Les modules
+// -*- Messages d'info
+.info__err{
+  @include info_discrete;
+}
+
+// -*- Buttons
+.btn__navfiles{
+  display: inline-block;
+  margin-bottom: .5em;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border: none;
+
+  @include button-style($colorBtn, lighten($colorBtn, 20%), $colorLight);
+}
+
+
+// Le rendu...
+#main-wrapper{
+  min-height: 100%;
+  overflow: auto;
+
+  @include clearfix;
+}
+#markdocs-nav{
+  height: 100%;
+  padding: 1em;
+  box-shadow: 0 0 12px #333;
+}
+#markdocs-render{
+  padding: 1em 30px 2em $widthSidebar + 30;
+
+
+}
+#markdocs-nav {
+  width: $widthSidebar;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
+  color: $colorNavFont;
+  background-color: $colorNavBg;
+
+  ul{
+    list-style: none;
+    padding: 0;
+  }
+
+  li{
+    margin-bottom: .5em;
+  }
+
+  a{
+    text-decoration: none;
+    color: inherit;
+    
+    &:hover{
+      color: #ccc;
+    }
+  }
+
+  .title_nav{
+    display: inline-block;
+    padding: 0;
+    margin-bottom: 5px;
+
+    @for $i from 3 through 6{
+      &.title_H#{$i}{
+        padding-left: #{$i*5}px;
+      }
+    }
+  }
+  .title_H1{
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: underline;
+  }
+  .title_H2{
+    margin-top: .5em;
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}

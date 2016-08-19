@@ -1,0 +1,21 @@
+{
+  "name": "markdocs-js",
+  "version": "1.0.2",
+  "description": "MD files reader, convert to HTML & and build documentation pages",
+  "author": "seblabbe <labbe.seb@gmail.com> (https://github.com/webSebLabbe)",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "foundation-sites": "^6.2.3",
+    "grunt": "^1.0.1",
+    "grunt-autoprefixer": "^3.0.4",
+    "grunt-babel": "^6.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "jquery": "^3.1.0",
+    "load-grunt-tasks": "^3.5.0",
+    "showdown": "^1.4.2"
+  }
+}
