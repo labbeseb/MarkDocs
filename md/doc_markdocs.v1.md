@@ -1,4 +1,4 @@
-# Markdocs v1.0
+# MarkdocsJS v1.0
 
 > Markdocs permet de mettre en place rapidement une page de documentation pour vos outils ou sites 
 à partir de fichiers Markdown.

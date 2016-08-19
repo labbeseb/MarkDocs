@@ -12620,7 +12620,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO : finir de commenter les methodes
 //TODO : faire la doc de markdocs...
 //TODO : page d'erreur si .md pas trouvé
-//TODO : trier liste filesNav
+//TODO : trier liste filesNav par dossiers !!!
 //TODO : (moins important) - loader au chargement des fichiers de doc
 
 var $ = jQuery,
