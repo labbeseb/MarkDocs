@@ -89,7 +89,7 @@ class Markdocs {
                 if(arrayFiles.length > 1) {
                     this._createNavFiles();
                 }
-            }, 100);
+            }, 500);
         });
     }
 
