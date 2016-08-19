@@ -1,33 +1,36 @@
-# Markdocs v1.0
+# Markdocs JS v1.0
 
 > Markdocs permet de mettre en place rapidement une page de documentation pour vos outils ou sites 
 à partir de fichiers Markdown.
 
-## Installation
+## Installation / Récupération
 
     npm install markdocs-js
     
 ou...
     
     bower install markdocs-js
+    
+ou... [en téléchargeant le .zip](https://github.com/webSebLabbe/MarkDocs/archive/master.zip)
+
+ou encore [sur GitHub](https://github.com/webSebLabbe/MarkDocs)
 
 
 ## Paramétrage
 
 ### Utilisation rapide
-Copier le contenu du dossier **docs/** de Markdocs (index.html, assets/, md/) et modifier les paramètres (var **mdopts**) avec vos propres fichiers .md
+Copier le contenu du dossier **docs/** de Markdocs (*index.html, assets/, md/*) et modifier les paramètres (var **mdopts**) avec vos propres fichiers .md
 
 ### Utilisation custom
 Si vous avez votre propre template html :
 
 - insérez markdocs.min.js dans votre projet
-- Déclarez une instance de Markdocs qui prend en paramètre un objet d'options contenant au moins l'index mdFiles (Array) obligatoire.
-- modifiez les options pour écrire dans vos propres conteneurs ([voir les options](#options))
-
-mdFiles définit les chemins de vos fichiers .md, le premier index sera celui affiché au chargement de la page de doc.
+- Déclarez une instance de Markdocs qui prend en paramètre un objet d'options **contenant au moins** l'index *mdFiles* (Array) obligatoire.
+- et modifiez les options pour écrire dans vos propres conteneurs ([voir les options](#options))
 
 
 ### exemple
+
 ```html
 <body>
     <div id="main-wrapper">
