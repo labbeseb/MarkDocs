@@ -24,8 +24,6 @@ Si vous avez votre propre template html :
 - Déclarez une instance de Markdocs qui prend en paramètre un objet d'options contenant au moins l'index mdFiles (Array) obligatoire.
 - modifiez les options pour écrire dans vos propres conteneurs ([voir les options](#options))
 
-mdFiles définit les chemins de vos fichiers .md, le premier index sera celui affiché au chargement de la page de doc.
-
 
 ### exemple
 ```html
@@ -48,20 +46,40 @@ mdFiles définit les chemins de vos fichiers .md, le premier index sera celui af
                     'md/category/autrefichier.md'
                 ],
                 genericNames: {
-                    
+                    container_docBody: 'wrapper-nav',   //--> définition du conteneur de la navigation
+                    container_docNav: 'wrapper-text'    //--> définition du conteneur de la doc
                 }  
             },
-            doc = new Markdocs(options);
+            doc = new Markdocs(options); //--> génération de la page...
 </script>
 </body>
 ```
 
 
 ## Options
-### Nom des fichiers
-Le nom de vos fichiers .md, renseignés dans le tableau à la déclaration de Markdocs, déterminera le nom des boutons (sans le chemin ni extension).
 
-> ex: /path/where/is/your/doc-file.md deviendra "doc-file" pour la navigation dans ce fichier
+### mdFiles
 
-### Templates
-> à venir...
+***array* (required)**
+
+La liste de vos fichiers .md sous forme d'array.
+
+### genericNames
+**object**
+
+Liste des id des conteneurs pour générer la page :
+- *container_docBody* : wrapper général du corps de la doc (*default : markdocs-render*)
+- *container_docNav* : wrapper general de la navigation (*default : markdocs-nav*)
+- *container_filesNav* : wrapper de la navigation entre fichiers, insérée à la fin du container_docNav (*default : markdocs-nav-files*)
+
+**En cas de changement de ces paramètres, n'utilisez QUE des id dans votre html**
+
+### showdownOptions
+**object**
+
+MarkdocsJs utilise [Showdown](https://github.com/showdownjs/showdown) pour convertir le texte MD en html, 
+ce paramètre permet de mofifier les paramètre de Showdown comme vous voulez ([liste des options](https://github.com/showdownjs/showdown#options))
+
+## Tips
+
+- [Mémo des fonctionnalités du Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
