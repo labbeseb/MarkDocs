@@ -12650,7 +12650,7 @@ var Markdocs = function () {
         // =*= Propriétés
         th._settings = Markdocs._mergeOptions(options);
         th._docFiles = [];
-        th._timerLoadNav = 100;
+        th._timerLoadNav = 400;
 
         // =*= Vérifications
         if (typeof th._settings.mdFiles === 'undefined' || !$.isArray(th._settings.mdFiles)) throw new Error('Il manque l\'index mdFiles, mdFiles doit être un tableau...');
