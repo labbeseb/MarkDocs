@@ -542,8 +542,8 @@ hr {
   border-top: 1px solid #cdcdcd;
 }
 #markdocs-nav hr {
-  border-top-color: #148f77;
-  border-bottom-color: #28e1bd;
+  border-top-color: #50998a;
+  border-bottom-color: #8cc3b8;
 }
 
 .info__err {
@@ -557,12 +557,14 @@ hr {
 .btn__navfiles {
   display: inline-block;
   margin-bottom: .5em;
+  padding-top: 2px;
+  padding-bottom: 2px;
   border: none;
-  background-color: #d35400;
+  background-color: #5a5a5a;
   color: #dedede;
 }
 .btn__navfiles:hover, .btn__navfiles:focus {
-  background-color: #ff883a;
+  background-color: #8d8d8d;
   color: #dedede;
 }
 
@@ -595,7 +597,7 @@ hr {
   bottom: 0;
   overflow: auto;
   color: #ecf0f1;
-  background-color: #1abc9c;
+  background-color: #6bb1a3;
 }
 #markdocs-nav ul {
   list-style: none;

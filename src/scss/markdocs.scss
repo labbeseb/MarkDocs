@@ -123,6 +123,8 @@ hr{
 .btn__navfiles{
   display: inline-block;
   margin-bottom: .5em;
+  padding-top: 2px;
+  padding-bottom: 2px;
   border: none;
 
   @include button-style($colorBtn, lighten($colorBtn, 20%), $colorLight);
