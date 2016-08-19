@@ -31,7 +31,7 @@ class Markdocs {
         // =*= Propriétés
         th._settings = Markdocs._mergeOptions(options);
         th._docFiles = [];
-        th._timerLoadNav = 100;
+        th._timerLoadNav = 400;
 
         // =*= Vérifications
         if( typeof th._settings.mdFiles === 'undefined' || !$.isArray(th._settings.mdFiles) )
