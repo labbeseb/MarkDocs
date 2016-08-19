@@ -1,3 +1,0 @@
-# MarkDocs
-
-Genere une page html de documentation à partir d'un fichier MD...
