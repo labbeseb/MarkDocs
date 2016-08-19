@@ -12,21 +12,20 @@
         <div class="info__err">Chargement de la navigation...</div>
     </div>
     <div id="markdocs-render">
-        <div class="info__err">
-            La doc charge, n'allez pas vous préparer un café, ni fumer une clope ou même lancer une discussion avec un collègue...
-            si vous avez le temps de lire ce texte en entier, c'est qu'il y a un problème&nbsp;:)
-        </div>
+        <div class="info__err">La doc charge, n'allez pas vous préparer un café, ni fumer une clope ou même lancer une discussion avec un collègue...
+            si vous avez le temps de lire ce texte en entier, c'est qu'il y a un problème&nbsp;!</div>
     </div>
 </div>
 
 <script src="assets/markdocs.min.js"></script>
 <script>
     var mdOpts = {
-            mdFiles: ['md/doc_markdocs.v1.md', 'md/sample.md'],
-            genericNames: {
-            }
+            mdFiles: [
+                'md/doc_markdocs.v1.md',
+                'md/samples.md'
+            ]
         },
-        p = new Markdocs(mdOpts);
+        doc = new Markdocs(mdOpts);
 </script>
 </body>
 </html>
