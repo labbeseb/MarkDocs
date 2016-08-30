@@ -64,7 +64,6 @@ module.exports = function(grunt) {
             },
             dist: {
                 src: [
-                    'node_modules/jquery/dist/jquery.js',
                     'node_modules/showdown/dist/showdown.js',
                     'src/scripts/app.dev.js'
                 ],

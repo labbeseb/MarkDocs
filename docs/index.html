@@ -17,13 +17,17 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
 <script src="assets/markdocs.js"></script>
 <script>
     var mdOpts = {
             mdFiles: [
                 'md/doc_markdocs.v1.md',
-                'md/samples.md'
-            ]
+                'md/samples/samples.md',
+                'md/samples/categories.md'
+            ],
+            categoriesActived: true,
+            categoriesLvl: 1
         },
         doc = new Markdocs(mdOpts);
 </script>

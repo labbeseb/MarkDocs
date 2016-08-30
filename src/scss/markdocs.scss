@@ -22,8 +22,13 @@ body{
 // Les titres
 @for $i from 1 through 6{
   h#{$i}{
+    margin-top: 2em;
     color: $colorTitleFont;
   }
+}
+
+h1{
+  margin-top: 0;
 }
 
 
@@ -199,5 +204,17 @@ hr{
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
+  }
+}
+
+// -*- Catégories
+#markdocs-cat-maintitle{
+  font-weight: bold;
+}
+#markdocs-cat-title{
+  text-decoration: underline;
+
+  &:before{
+    content: '_';
   }
 }
