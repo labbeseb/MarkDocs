@@ -4,9 +4,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-//TODO : page d'erreur si .md pas trouvé
-//TODO : rappel de la page courante en cas de rechergement (suppression #nav + stockage dernière page en Local Storage ?)
-//TODO : (moins important) - loader au chargement des fichiers de doc
+//TODO: unit tests !!!
+//TODO: page d'erreur si .md pas trouvé
+//TODO: rappel de la page courante en cas de rechergement (suppression #nav + stockage dernière page en Local Storage ?)
+//TODO: (moins important) - loader au chargement des fichiers de doc
 
 var $ = jQuery,
     sdn = showdown;
@@ -117,6 +118,7 @@ var Markdocs = function () {
          * Converti le MD en html
          *
          * @param md
+         * @param converter
          * @returns {*}
          * @private
          */
@@ -124,7 +126,8 @@ var Markdocs = function () {
     }, {
         key: '_parseMdToHtml',
         value: function _parseMdToHtml(md) {
-            var converter = new sdn.Converter();
+            var converter = arguments.length <= 1 || arguments[1] === undefined ? new sdn.Converter() : arguments[1];
+
 
             // application des options
             for (var opp in this._settings.showdownOptions) {

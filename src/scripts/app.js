@@ -1,6 +1,7 @@
-//TODO : page d'erreur si .md pas trouvé
-//TODO : rappel de la page courante en cas de rechergement (suppression #nav + stockage dernière page en Local Storage ?)
-//TODO : (moins important) - loader au chargement des fichiers de doc
+//TODO: unit tests !!!
+//TODO: page d'erreur si .md pas trouvé
+//TODO: rappel de la page courante en cas de rechergement (suppression #nav + stockage dernière page en Local Storage ?)
+//TODO: (moins important) - loader au chargement des fichiers de doc
 
 let $ = jQuery,
     sdn = showdown;
@@ -103,11 +104,11 @@ class Markdocs {
      * Converti le MD en html
      *
      * @param md
+     * @param converter
      * @returns {*}
      * @private
      */
-    _parseMdToHtml(md) {
-        let converter = new sdn.Converter();
+    _parseMdToHtml(md, converter = new sdn.Converter()) {
 
         // application des options
         for (let opp in this._settings.showdownOptions) {
