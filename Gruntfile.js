@@ -21,7 +21,6 @@ module.exports = function(grunt) {
 				}
 		    }
 		},
-
         autoprefixer: {
             options: {
                 browsers: ['last 2 versions', 'ie 10']
@@ -31,7 +30,6 @@ module.exports = function(grunt) {
                 dest: 'docs/assets/markdocs.css'
             }
         },
-
         cssmin: {
             options: {
                 shorthandCompacting: false,
@@ -80,7 +78,17 @@ module.exports = function(grunt) {
 
 
 
+        // Tests
+        browserify: {
+            tests: {
+                files: {
+                    'tests/tests.js': 'tests/specs.js'
+                }
+            }
+        },
 
+
+        // Watchify
         watch: {
             scripts: {
                 files: ['src/scripts/*.js'],
@@ -91,6 +99,10 @@ module.exports = function(grunt) {
                 files: ['src/scss/*.scss'],
                 tasks: ['sass', 'autoprefixer', 'cssmin'],
                 options: {}
+            },
+            tests: {
+                files: ['tests/specs.js'],
+                tasks: ['browserify:tests']
             }
         }
 
@@ -99,4 +111,5 @@ module.exports = function(grunt) {
 	// Task(s).
 	grunt.registerTask('js', ['watch:scripts']);
 	grunt.registerTask('css', ['watch:styles']);
+	grunt.registerTask('tests', ['watch:tests']);
 };
