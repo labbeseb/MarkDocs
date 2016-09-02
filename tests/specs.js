@@ -13,10 +13,33 @@ var mdOpts = {
     },
     MD = new Markdocs(mdOpts);
 
-describe('Test MarkdocsJs', function(){
 
+// Tests des otpions
+describe('options', function(){
     it('should be an Array', function(){
         assert.isArray(MD._settings.mdFiles, 'This is not an Array');
     });
+});
 
+
+// ===== Tests _getFileName
+describe('_getFileName', function(){
+    it('should return name without path and extension (md)', function(){
+        assert.equal(Markdocs._getFileName('/md/plop/onefile.md'), 'onefile', 'md extension not worked');
+    });
+    it('should return name without path and extension (txt)', function(){
+        assert.equal(Markdocs._getFileName('/md/plop/onefile.txt'), 'onefile', 'txt extension not worked');
+    });
+    it('should return name without path and extension (other)', function(){
+        assert.equal(Markdocs._getFileName('/md/plop/onefile.other'), 'onefile', 'others extensions not worked');
+    });
+});
+
+
+// ===== Tests _convertToObject
+
+describe('_convertToObject', function(){
+    it('should convert array to litteral object', function(){
+        assert.isArray(MD._settings.mdFiles, 'This is not an Array');
+    });
 });

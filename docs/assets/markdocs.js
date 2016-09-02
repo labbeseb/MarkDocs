@@ -2583,7 +2583,7 @@ var Markdocs = function () {
         if (typeof th._settings.mdFiles === 'undefined' || !$.isArray(th._settings.mdFiles) || th._settings.mdFiles.length <= 0) throw new Error('Il manque l\'index mdFiles, mdFiles doit être un tableau...');
 
         // =*= Execution
-        th._init();
+        this._loadPage(this._settings.mdFiles, this._settings.mdFiles[0]);
 
         // =*= Events
         $('body').on('click', 'button', function () {
@@ -2595,27 +2595,15 @@ var Markdocs = function () {
     }
 
     /**
-     * Chargement de la page avec le fichier par défaut à l'arrivée sur la doc
+     * Chargement ou rechargement de la page en fonction de la catégorie choisie
      *
+     * @param arrayFiles
+     * @param filePage
      * @private
      */
 
 
     _createClass(Markdocs, [{
-        key: '_init',
-        value: function _init() {
-            this._loadPage(this._settings.mdFiles, this._settings.mdFiles[0]);
-        }
-
-        /**
-         * Chargement ou rechargement de la page en fonction de la catégorie choisie
-         *
-         * @param arrayFiles
-         * @param filePage
-         * @private
-         */
-
-    }, {
         key: '_loadPage',
         value: function _loadPage(arrayFiles, filePage) {
             var _this = this;
@@ -2837,3 +2825,22 @@ var Markdocs = function () {
 
     return Markdocs;
 }();
+
+// Exemple Singleton @julien
+//
+// let singleton = Symbol();
+// let singletonEnforcer = Symbol();
+//
+// class SingletonTest {
+//
+//     constructor(enforcer) {
+//         if(enforcer != singletonEnforcer) throw "Cannot construct singleton";
+//     }
+//
+//     static get instance() {
+//         if(!this[singleton]) {
+//             this[singleton] = new SingletonTest(singletonEnforcer);
+//         }
+//         return this[singleton];
+//     }
+// }

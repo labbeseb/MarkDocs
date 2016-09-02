@@ -39,7 +39,7 @@ class Markdocs {
             throw new Error(`Il manque l'index mdFiles, mdFiles doit être un tableau...`);
 
         // =*= Execution
-        th._init();
+        this._loadPage(this._settings.mdFiles, this._settings.mdFiles[0]);
 
         // =*= Events
         $('body').on('click', 'button', function () {
@@ -50,14 +50,6 @@ class Markdocs {
         });
     }
 
-    /**
-     * Chargement de la page avec le fichier par défaut à l'arrivée sur la doc
-     *
-     * @private
-     */
-    _init() {
-        this._loadPage(this._settings.mdFiles, this._settings.mdFiles[0]);
-    }
 
     /**
      * Chargement ou rechargement de la page en fonction de la catégorie choisie
@@ -277,3 +269,22 @@ class Markdocs {
         }
     }
 }
+
+// Exemple Singleton @julien
+//
+// let singleton = Symbol();
+// let singletonEnforcer = Symbol();
+//
+// class SingletonTest {
+//
+//     constructor(enforcer) {
+//         if(enforcer != singletonEnforcer) throw "Cannot construct singleton";
+//     }
+//
+//     static get instance() {
+//         if(!this[singleton]) {
+//             this[singleton] = new SingletonTest(singletonEnforcer);
+//         }
+//         return this[singleton];
+//     }
+// }
